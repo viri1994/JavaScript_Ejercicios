@@ -8,14 +8,18 @@ setTimeout(foo, 3000);*/
 /*let foo = () => console.log('in callback!');
 setTimeout(foo, 3000) */
 
-/*Recorre un arreglo usando un callback, imprime cada elemento
+//Convierte en promesa los ejercicios 1
 
-Haz varios callbacks de forma que se imprima:
+
+//Recorre un arreglo usando un callback, imprime cada elemento
+
+/*Haz varios callbacks de forma que se imprima:
 1 después de 3 segundos
 2 después de 1 segundo
 3 después de 4 segundos
 En consola debería verse 2 1 3*/
-    /*setTimeout(()=> console.log(2),1000);
+
+   /* setTimeout(()=> console.log(2),1000);
     setTimeout(()=> console.log(1),2000);
     setTimeout(()=> console.log(3),3000);*/
 
@@ -77,25 +81,43 @@ const asyncHell = async () => {
 asyncHell();*/
 //Crea una Cadena de Promesas en la cual una lanza un error (no hagas Catch)
 
-a1= new Promise((resolve, reject)=>setTimeout(resolve,1000, 1))
-a2= new Promise((resolve, reject)=>setTimeout(resolve,2000, 2))
-a3= new Promise((resolve, reject)=>setTimeout(resolve,3000, 3))
-e=Promise.reject('no!');
+Promise.resolve(1).then(num => num * 2).then(num => num - 1).then(resp => console.log(resp)); //sigue la secuencia porque no hay reject
 
-Promise.resolve(1).then(v=>console.log(v));
 
-console.log(Promise.all([a2, a1, e, a3]));
+
 //Agrega un catch al ejercicio anterior
 
-
-
+Promise.resolve(1).then(num => num *2).then(num => Promise.reject(num)).then(num => num -1).catch(resp => console.log('Error' + resp)); //cuando llega a la reject ya no ejecuta eol siguiente paso y se pasa al catch
 
 
 //Agrega un finally al ejercicio anterior
+Promise.resolve(1).then(num => num *2).then(num => Promise.reject(num)).then(num => num -1).finally(resp => console.log('Finalizo' + resp));
 
 
 //Crea una función con 3 promesas, que acaben a tiempos diferentes y regresa en cuanto la primera termina
+let prom = () => { 
+
+a1= new Promise((resolve, reject)=>setTimeout(resolve,1000, 1))
+a2= new Promise((resolve, reject)=>setTimeout(resolve,2000, 2))
+a3= new Promise((resolve, reject)=>setTimeout(resolve,3000, 3))
+return Promise.race([a1, a2, a3]);
+}
+
+prom().then((mensaje) => console.log(mensaje));
+
 //Crea una función con 4 promesas, que acaben a tiempos diferentes y regresa cuando todas acaben
+
+let promesas = () => { 
+
+    p1= new Promise((resolve, reject)=>setTimeout(resolve,1000, 1))
+    p2= new Promise((resolve, reject)=>setTimeout(resolve,2000, 2))
+    p3= new Promise((resolve, reject)=>setTimeout(resolve,3000, 3))
+    p4= new Promise((resolve, reject)=>setTimeout(resolve,3000, 3))
+    return Promise.all([p1, p2, p3, p4]);
+    }
+    
+    promesas().then((mensaje) => console.log(mensaje));
+    
 //Crea una Cadena de Promesas en la cual una se rechaza, asegurate de agregar un catch
 //Crea una Cadena de Promesas en la cual una se rechaza, agrega varios catch
 

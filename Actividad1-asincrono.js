@@ -117,7 +117,8 @@ let promesas = () => {
     }
     
     promesas().then((mensaje) => console.log(mensaje));
-    
+
 //Crea una Cadena de Promesas en la cual una se rechaza, asegurate de agregar un catch
+Promise.resolve(1).then(num => num *2).then(num => Promise.reject(num)).then(num => num -1).finally(resp => console.log('Finalizo' + resp));
 //Crea una Cadena de Promesas en la cual una se rechaza, agrega varios catch
 

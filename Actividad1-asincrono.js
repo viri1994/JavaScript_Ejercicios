@@ -9,6 +9,9 @@ setTimeout(foo, 3000);*/
 setTimeout(foo, 3000) */
 
 //Convierte en promesa los ejercicios 1
+    setTimeout(()=>Promise.resolve(2).then(console.log),1000);
+    setTimeout(()=>Promise.resolve(1).then(console.log),2000);
+    setTimeout(()=>Promise.resolve(3).then(console.log),3000);
 
 
 //Recorre un arreglo usando un callback, imprime cada elemento
@@ -18,17 +21,16 @@ setTimeout(foo, 3000) */
 2 después de 1 segundo
 3 después de 4 segundos
 En consola debería verse 2 1 3*/
-
-   /* setTimeout(()=> console.log(2),1000);
-    setTimeout(()=> console.log(1),2000);
-    setTimeout(()=> console.log(3),3000);*/
+        setTimeout(()=> console.log(2),1000);
+        setTimeout(()=> console.log(1),2000);
+        setTimeout(()=> console.log(3),3000);
 
 //Escribe un callback que recibe un argumento y lo imprime
-/*function arg(palabra){
-    console.log(2)
-    console.log(palabra);
-    console.log(3)
-}
+    function arg(palabra){
+        console.log(2)
+        console.log(palabra);
+        console.log(3)
+    }
 //funcion que recibe el call back anterior y lo ejecuta
 function gets(callback){
     console.log(1)
@@ -36,10 +38,10 @@ function gets(callback){
 }
 
 gets(arg)
-*/
+
 //Crea una función que llama a un callback y usa el valor que regresa para llamar a otro. Después debe llamar a un tercer callback con el valor que regresa el segundo*/
 
-/*function first (){
+function first (){
     callback('first');
 
 }
@@ -60,12 +62,12 @@ first(firstValue =>{
     });
 });
 
-*/
+
 
 
 //Promises
 //Convierte todos los ejercicios de la parte 1 a usar Promises
-/*Promise.resolve('first').then(firstValue => {
+Promise.resolve('first').then(firstValue => {
     Promise.resolve(`second, ${firstValue}`).then(secondValue => {
         Promise.resolve(`third, (${secondValue}), ${firstValue}`).then(console.log);
     })
@@ -78,7 +80,7 @@ const asyncHell = async () => {
     const thirdValue = await Promise.resolve(`third, (${secondValue}), ${firstValue}`);
     console.log(thirdValue);
 }
-asyncHell();*/
+asyncHell();
 //Crea una Cadena de Promesas en la cual una lanza un error (no hagas Catch)
 
 Promise.resolve(1).then(num => num * 2).then(num => num - 1).then(resp => console.log(resp)); //sigue la secuencia porque no hay reject
@@ -119,5 +121,18 @@ let promesas = () => {
     promesas().then((mensaje) => console.log(mensaje));
     
 //Crea una Cadena de Promesas en la cual una se rechaza, asegurate de agregar un catch
+Promise.all([Promise.resolve(1), Promise.resolve(2), Promise.reject('Rechazada!!'), Promise.resolve(1)])
+  .then(arr => console.log(arr)).catch(e => console.log(e));
+
+
 //Crea una Cadena de Promesas en la cual una se rechaza, agrega varios catch
+
+gets()
+.then(1)
+.catch((error) =>console.log('Esto es un error' + error))
+.then(2)
+.catch((mensaje)=> console.log(mensaje))
+.finally(()=> console.log('aqui finaliza'));
+
+
 
